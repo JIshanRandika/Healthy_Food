@@ -107,7 +107,7 @@ export default class Myapp extends Component
 
                             }}>
                                 <Text onPress={() => {
-                                    this.props.navigation.push('Avatar');
+                                    this.props.navigation.push('OCR');
                                 }
                                 } style={{textAlign: 'center', color: '#0090ff', fontWeight: "bold", marginTop: 3, fontSize:16}}>
                                     Login

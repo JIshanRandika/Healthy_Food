@@ -4,23 +4,25 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 
 import Splash from './views/Splash'
+import OCR from './views/OCR'
 
 
 
 const AppNavigator = createStackNavigator(
     {
 
-        Splash:Splash
-        // Headers:Header
+      Splash:Splash,
+      OCR:OCR
+      // Headers:Header
     },
     {
-        initialRouteName: "Splash"
+      initialRouteName: "Splash"
     }
 );
 
 const AppContainer = createAppContainer(AppNavigator);
 export default class App extends React.Component {
-    render() {
-        return <AppContainer />;
-    }
+  render() {
+    return <AppContainer />;
+  }
 }
