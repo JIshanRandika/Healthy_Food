@@ -20,6 +20,9 @@ function OCR() {
     const [progress, setProgress] = useState(0);
     const [imgSrc, setImgSrc] = useState(null);
     const [text, setText] = useState('');
+
+
+
     useEventListener('onProgressChange', (p) => {
         setProgress(p.percent / 100);
     });
@@ -43,7 +46,9 @@ function OCR() {
         setIsLoading(false);
         setProgress(0);
     };
-
+    // const tesseractOptions = {
+    //
+    // };
     const recognizeFromPicker = async (options = defaultPickerOptions) => {
         try {
             const image = await ImagePicker.openPicker(options);
@@ -67,6 +72,8 @@ function OCR() {
             }
         }
     };
+
+
 
     return (
         <View style={styles.container}>
@@ -99,10 +106,24 @@ function OCR() {
                         <ProgressCircle showsText progress={progress} />
                     ) : (
                         <Text>{text}</Text>
+
                     )}
                 </View>
             )}
+            <View style={styles.button}>
+                <Button
+                    disabled={isLoading}
+                    title="Check"
+                    onPress={() => {
+                        var array = text.split(" ");
+                        console.log(array);
+                    }}
+                />
+            </View>
         </View>
+
+
+
     );
 }
 

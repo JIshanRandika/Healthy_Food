@@ -23,7 +23,8 @@
     "react-native-screens": "^2.10.1",
     "react-native-tesseract-ocr": "^2.0.3",
     "react-navigation": "^4.4.4",
-    "react-navigation-stack": "^2.8.2"
+    "react-navigation-stack": "^2.8.2",
+    "rn-update-apk": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
