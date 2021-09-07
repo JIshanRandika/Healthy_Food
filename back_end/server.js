@@ -7,7 +7,7 @@ app.use(bodyParser.json())
 const dbConfig = require('./app/config/mongodb.config.js');
 const mongoose = require('mongoose');
 
-const Customer = require('./app/models/ingredient.model.js');
+const Ingredient = require('./app/models/ingredient.model.js');
 
 mongoose.Promise = global.Promise;
 
@@ -45,7 +45,7 @@ mongoose.connect(dbConfig.url, { useNewUrlParser: true, useUnifiedTopology: true
 
         for(let i=0; i<Ingredients.length; i++){
 
-            const Ingredient = new Customer({
+            const Ingredient = new Ingredient({
                 ingredientName: Ingredients[i].ingredientName,
                 status: Ingredients[i].status,
                 description: Ingredients[i].description,
