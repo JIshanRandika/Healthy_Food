@@ -1,11 +1,13 @@
+
+
 const mongoose = require('mongoose');
 
 const IngredientSchema = mongoose.Schema({
     ingredientName: String,
     status: String,
     description: String,
-    alternate:String,
-    image:String
+    alternate: String,
+    image: String
 
 });
 

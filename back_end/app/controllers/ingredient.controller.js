@@ -1,5 +1,5 @@
-const Ingredient = require('../models/ingredient.model');
 
+const Ingredient = require('../models/ingredient.model');
 
 
 // FETCH all Ingredients
@@ -17,8 +17,7 @@ exports.ingredients = (req, res) => {
     });
 };
 
-
-// get a Ingredient by Status
+// get a Ingredient by Id
 exports.getIngredient = (req, res) => {
     Ingredient.findById(req.params.id).select('-__v')
         .then(ingredient => {
@@ -36,3 +35,7 @@ exports.getIngredient = (req, res) => {
         });
     });
 };
+
+
+
+
