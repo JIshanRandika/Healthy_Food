@@ -22,7 +22,6 @@ function OCR() {
     const [text, setText] = useState('');
 
 
-
     useEventListener('onProgressChange', (p) => {
         setProgress(p.percent / 100);
     });
@@ -117,9 +116,26 @@ function OCR() {
                     onPress={() => {
                         var array = text.split(" ");
                         console.log(array);
+
+
                     }}
                 />
             </View>
+
+
+
+
+            {/*===================================*/}
+            {/*<View style={styles.button}>*/}
+            {/*    <Button*/}
+            {/*        disabled={isLoading}*/}
+            {/*        title="DB"*/}
+            {/*        onPress={() => {*/}
+            {/*            var array = text.split(" ");*/}
+            {/*            console.log(array);*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*</View>*/}
         </View>
 
 
