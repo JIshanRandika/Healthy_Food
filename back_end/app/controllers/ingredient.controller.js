@@ -3,7 +3,7 @@ const Ingredient = require('../models/ingredient.model');
 
 
 // FETCH all Ingredients
-exports.Ingredients = (req, res) => {
+exports.ingredients = (req, res) => {
     Ingredient.find().select('-__v').then(ingredientInfos => {
         res.status(200).json(ingredientInfos);
     }).catch(error => {
