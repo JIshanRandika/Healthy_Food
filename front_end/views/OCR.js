@@ -22,12 +22,15 @@ function OCR() {
     const [text, setText] = useState('');
 
 
+
     useEventListener('onProgressChange', (p) => {
         setProgress(p.percent / 100);
     });
 
     const recognizeTextFromImage = async (path) => {
         setIsLoading(true);
+
+
 
         try {
             const tesseractOptions = {};
@@ -42,11 +45,13 @@ function OCR() {
             setText('');
         }
 
+
+
         setIsLoading(false);
         setProgress(0);
     };
     // const tesseractOptions = {
-    //
+
     // };
     const recognizeFromPicker = async (options = defaultPickerOptions) => {
         try {
@@ -72,6 +77,41 @@ function OCR() {
         }
     };
 
+
+    // ==========================================
+
+
+
+    const checkIngredient = async (ingredientArray) => {
+        // fetch('/api/getsome')
+        //     .then(response => response.json())
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ingredientArray: ingredientArray })
+        };
+
+        await fetch(`http://192.168.8.100:8080/api/check`,requestOptions)
+        .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                console.log(data)
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+
+                // this.setState({ postId: data.id })
+            }
+        ).catch(function (error) {
+            console.log(error);
+        })
+    }
+// =======================================================================
 
 
     return (
@@ -115,9 +155,11 @@ function OCR() {
                     title="Check"
                     onPress={() => {
                         var array = text.split(" ");
-                        console.log(array);
 
 
+                        var arraytest = ["HA", "HB", "UA", "A", "B"]
+                        checkIngredient(arraytest);
+                        console.log(arraytest);
                     }}
                 />
             </View>

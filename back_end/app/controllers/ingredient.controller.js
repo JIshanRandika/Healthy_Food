@@ -66,5 +66,23 @@ exports.ingredintget = async(req, res) => {
 
 
 
+exports.ckeckIngredient = async(req, res) => {
+    // Ingredient.find().select('-__v')
+    // console.log(req);
+    let ingredients=req.body.ingredientArray;
+    console.log(ingredients);
+    let trueIngredients=[];
+    for (let i = 0; i < ingredients.length; i++) {
+
+        let ers=await Ingredient.find({ingredientName:ingredients[i]}).select(['ingredientName', 'status']);
+        if(ers.length!=0){
+            trueIngredients.push(ers[0]);
+        }
+    }
+    console.log(trueIngredients);
+    return res.status(200).send(trueIngredients);
+};
+
+
 
 
