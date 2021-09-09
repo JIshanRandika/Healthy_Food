@@ -18,7 +18,7 @@
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.32.2",
-    "react-native-progress": "^4.0.3",
+    "react-native-progress": "^4.1.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^2.10.1",
     "react-native-tesseract-ocr": "^2.0.3",

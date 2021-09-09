@@ -5,14 +5,15 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Splash from './views/Splash'
 import OCR from './views/OCR'
+import Results from './views/Results'
 
 
 
 const AppNavigator = createStackNavigator(
     {
-
-      Splash:Splash,
-      OCR:OCR
+        Splash:Splash,
+        OCR:OCR,
+        Results:Results
       // Headers:Header
     },
     {

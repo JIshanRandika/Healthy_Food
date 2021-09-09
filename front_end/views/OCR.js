@@ -7,6 +7,8 @@ import TesseractOcr, {
     useEventListener,
 } from 'react-native-tesseract-ocr';
 
+
+
 const DEFAULT_HEIGHT = 500;
 const DEFAULT_WITH = 600;
 const defaultPickerOptions = {
@@ -15,11 +17,13 @@ const defaultPickerOptions = {
     width: DEFAULT_WITH,
 };
 
-function OCR() {
+function OCR({navigation}) {
     const [isLoading, setIsLoading] = useState(false);
     const [progress, setProgress] = useState(0);
     const [imgSrc, setImgSrc] = useState(null);
     const [text, setText] = useState('');
+
+
 
 
 
@@ -92,12 +96,14 @@ function OCR() {
             body: JSON.stringify({ ingredientArray: ingredientArray })
         };
 
-        await fetch(`http://192.168.8.100:8080/api/check`,requestOptions)
+        await fetch(`http://192.168.8.101:8080/api/check`,requestOptions)
         .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
-                const data = isJson && await response.json();
+                 global.IngredientData = isJson && await response.json();
 
-                console.log(data)
+                console.log(IngredientData)
+                // return data;
+
                 // check for error response
                 if (!response.ok) {
                     // get error message from body or default to response status
@@ -115,6 +121,7 @@ function OCR() {
 
 
     return (
+
         <View style={styles.container}>
             <Text style={styles.title}>Ishan Randika</Text>
             <Text style={styles.instructions}>OCR TEST</Text>
@@ -154,14 +161,20 @@ function OCR() {
                     disabled={isLoading}
                     title="Check"
                     onPress={() => {
+
                         var array = text.split(" ");
 
 
-                        var arraytest = ["HA", "HB", "UA", "A", "B"]
+                        var arraytest = ["HA", "HB","UA","A", "B"]
                         checkIngredient(arraytest);
+
                         console.log(arraytest);
+
+                        navigation.navigate('Results')
+
                     }}
                 />
+
             </View>
 
 
