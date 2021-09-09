@@ -3,8 +3,23 @@ import {
     Platform, StyleSheet, View, Text,
     Image, TouchableOpacity, Alert, Dimensions, TextInput, KeyboardAvoidingView
 } from 'react-native';
+// global.IngredientData =[
+//     {
+//         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+//         title: "First Item",
+//     },
+//     {
+//         id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+//         title: "Second Item",
+//     },
+//     {
+//         id: "58694a0f-3da1-471f-bd96-145571e29d72",
+//         title: "Third Item",
+//     },
+// ];
 export default class Myapp extends Component
 {
+
     constructor(){
         super();
         this.state={
@@ -21,7 +36,7 @@ export default class Myapp extends Component
         var that = this;
         setTimeout(function(){
             that.Hide_Splash_Screen();
-        }, 5000);
+        }, 1000);
     }
     static navigationOptions = {
         headerShown: false
@@ -44,79 +59,112 @@ export default class Myapp extends Component
         return(
             <View style = { styles.MainContainer }>
                 <KeyboardAvoidingView behavior={Platform.OS == "android" } style={{flex: 6, alignItems: 'center', width: Dimensions.get('window').width}}>
+                    <View style={{flex: 2,}}>
+                    </View>
+
                     <View style={{flex: 3,}}>
                         <Image style={{
                             width: Dimensions.get('window').width,
                             height: Dimensions.get('window').width / 1.3
                         }} source={require('../assets/images/logo.png')}/>
                     </View>
+                    <View style={{flex: 1,}}>
+                    </View>
                     <View style={{
-                        marginBottom:Dimensions.get('window').height/20,
-                        height: 280,
-                        backgroundColor: "#ffffff",
-                        borderRadius: 10,
+                        // flex: 1,
+                        alignSelf: 'center',
+                        width: 170,
+                        height: 50,
+                        backgroundColor: "#107e7d",
+                        borderRadius: 15,
                         shadowColor: "#000",
                         shadowOffset: {
                             width: 0,
-                            height: 5,
+                            height: 0,
                         },
                         shadowOpacity: 0.34,
                         shadowRadius: 6.27,
 
                         elevation: 10,
-                        marginLeft: "10%",
-                        marginRight: "10%",
-                        paddingLeft: 40,
-                        paddingRight: 40
 
                     }}>
+                        <Text onPress={() => {
+                            this.props.navigation.push('OCR');
+                        }
+                        } style={{textAlign: 'center', color: '#ffffff', fontWeight: "bold", marginTop: 3, fontSize:25}}>
+                            Start Now
+                        </Text>
 
-                        <View style={{flex: 4,}}>
-                            <TextInput
-                                style={{ height: 40, borderColor: "#d2d2d2", borderWidth: 1, marginTop:"20%", borderRadius:8}}
-                                placeholder="User name"
-                            />
-                            <TextInput
-                                style={{ height: 40, borderColor: "#d2d2d2", borderWidth: 1, marginTop:"10%", borderRadius:8 }}
-                                placeholder="Password"
-                                textContentType="newPassword"
-                            />
-                        </View>
-                        <View style={{flex: 1,}}>
-                            <Text style={{textAlign: 'center', color: '#a8a8a8', fontSize:16}}>Lorem ipsum dolor sit amet,
-                                consectetur
-                            </Text>
-                        </View>
-
-                        <View style={{flex: 1,}}>
-                            <View style={{
-                                alignSelf: 'center',
-                                width: 150,
-                                height: 30,
-                                backgroundColor: "#ffffff",
-                                borderRadius: 15,
-                                shadowColor: "#000",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 0,
-                                },
-                                shadowOpacity: 0.34,
-                                shadowRadius: 6.27,
-
-                                elevation: 10,
-
-                            }}>
-                                <Text onPress={() => {
-                                    this.props.navigation.push('OCR');
-                                }
-                                } style={{textAlign: 'center', color: '#0090ff', fontWeight: "bold", marginTop: 3, fontSize:16}}>
-                                    Login
-                                </Text>
-
-                            </View>
-
-                        </View>
                     </View>
+                    <View style={{flex: 1,}}>
+                    </View>
+                    {/*<View style={{*/}
+                    {/*    marginBottom:Dimensions.get('window').height/20,*/}
+                    {/*    height: 280,*/}
+                    {/*    backgroundColor: "#ffffff",*/}
+                    {/*    borderRadius: 10,*/}
+                    {/*    shadowColor: "#000",*/}
+                    {/*    shadowOffset: {*/}
+                    {/*        width: 0,*/}
+                    {/*        height: 5,*/}
+                    {/*    },*/}
+                    {/*    shadowOpacity: 0.34,*/}
+                    {/*    shadowRadius: 6.27,*/}
+
+                    {/*    elevation: 10,*/}
+                    {/*    marginLeft: "10%",*/}
+                    {/*    marginRight: "10%",*/}
+                    {/*    paddingLeft: 40,*/}
+                    {/*    paddingRight: 40*/}
+
+                    {/*}}>*/}
+
+                    {/*    <View style={{flex: 4,}}>*/}
+                    {/*        <TextInput*/}
+                    {/*            style={{ height: 40, borderColor: "#d2d2d2", borderWidth: 1, marginTop:"20%", borderRadius:8}}*/}
+                    {/*            placeholder="User name"*/}
+                    {/*        />*/}
+                    {/*        <TextInput*/}
+                    {/*            style={{ height: 40, borderColor: "#d2d2d2", borderWidth: 1, marginTop:"10%", borderRadius:8 }}*/}
+                    {/*            placeholder="Password"*/}
+                    {/*            textContentType="newPassword"*/}
+                    {/*        />*/}
+                    {/*    </View>*/}
+                    {/*    <View style={{flex: 1,}}>*/}
+                    {/*        <Text style={{textAlign: 'center', color: '#a8a8a8', fontSize:16}}>Lorem ipsum dolor sit amet,*/}
+                    {/*            consectetur*/}
+                    {/*        </Text>*/}
+                    {/*    </View>*/}
+
+                    {/*    <View style={{flex: 1,}}>*/}
+                    {/*        <View style={{*/}
+                    {/*            alignSelf: 'center',*/}
+                    {/*            width: 150,*/}
+                    {/*            height: 30,*/}
+                    {/*            backgroundColor: "#ffffff",*/}
+                    {/*            borderRadius: 15,*/}
+                    {/*            shadowColor: "#000",*/}
+                    {/*            shadowOffset: {*/}
+                    {/*                width: 0,*/}
+                    {/*                height: 0,*/}
+                    {/*            },*/}
+                    {/*            shadowOpacity: 0.34,*/}
+                    {/*            shadowRadius: 6.27,*/}
+
+                    {/*            elevation: 10,*/}
+
+                    {/*        }}>*/}
+                    {/*            <Text onPress={() => {*/}
+                    {/*                this.props.navigation.push('OCR');*/}
+                    {/*            }*/}
+                    {/*            } style={{textAlign: 'center', color: '#0090ff', fontWeight: "bold", marginTop: 3, fontSize:16}}>*/}
+                    {/*                Login*/}
+                    {/*            </Text>*/}
+
+                    {/*        </View>*/}
+
+                    {/*    </View>*/}
+                    {/*</View>*/}
                 </KeyboardAvoidingView>
 
                 {

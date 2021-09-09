@@ -24,7 +24,7 @@ function OCR({navigation}) {
     const [text, setText] = useState('');
 
 
-
+    const [ingredientList, ingredientListSet] = React.useState([]);
 
 
     useEventListener('onProgressChange', (p) => {
@@ -48,7 +48,6 @@ function OCR({navigation}) {
             console.error(err);
             setText('');
         }
-
 
 
         setIsLoading(false);
@@ -84,7 +83,20 @@ function OCR({navigation}) {
 
     // ==========================================
 
-
+    // global.IngredientData =[
+    //     {
+    //         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    //         title: "First Item",
+    //     },
+    //     {
+    //         id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    //         title: "Second Item",
+    //     },
+    //     {
+    //         id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    //         title: "Third Item",
+    //     },
+    // ];
 
     const checkIngredient = async (ingredientArray) => {
         // fetch('/api/getsome')
@@ -99,9 +111,18 @@ function OCR({navigation}) {
         await fetch(`http://192.168.8.101:8080/api/check`,requestOptions)
         .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
-                 global.IngredientData = isJson && await response.json();
 
-                console.log(IngredientData)
+
+                 const data = isJson && await response.json();
+
+
+
+
+                 const testarray = ["a","s","as"]
+
+                 ingredientListSet(data);
+
+                 // console.log(data)
                 // return data;
 
                 // check for error response
@@ -117,6 +138,7 @@ function OCR({navigation}) {
             console.log(error);
         })
     }
+
 // =======================================================================
 
 
@@ -157,6 +179,24 @@ function OCR({navigation}) {
                 </View>
             )}
             <View style={styles.button}>
+                {/*<Button*/}
+                {/*    disabled={isLoading}*/}
+                {/*    title="Check"*/}
+                {/*    onPress={() => {*/}
+
+                {/*        var array = text.split(" ");*/}
+
+
+                {/*        var arraytest = ["HA", "HB","UA","A", "B", "UB", "UC","HC","HD","HE","UC","UD","UE", "UKA","HKD","HKE","HKC"]*/}
+                {/*        checkIngredient(arraytest);*/}
+
+                {/*        console.log(arraytest);*/}
+
+                {/*        navigation.navigate('Results')*/}
+
+                {/*    }}*/}
+                {/*/>*/}
+
                 <Button
                     disabled={isLoading}
                     title="Check"
@@ -165,12 +205,17 @@ function OCR({navigation}) {
                         var array = text.split(" ");
 
 
-                        var arraytest = ["HA", "HB","UA","A", "B"]
-                        checkIngredient(arraytest);
+                        var arraytest = ["HA", "HB","UA","A", "B", "UB", "UC","HC","HD","HE","UC","UD","UE", "UKA","HKD","HKE","HKC"]
+
+                        checkIngredient(array);
 
                         console.log(arraytest);
 
-                        navigation.navigate('Results')
+                        // console.log(ingredientList)
+
+                        navigation.navigate('YourResult',
+                            ingredientList
+                        )
 
                     }}
                 />
