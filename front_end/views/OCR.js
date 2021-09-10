@@ -108,7 +108,7 @@ function OCR({navigation}) {
             body: JSON.stringify({ ingredientArray: ingredientArray })
         };
 
-        await fetch(`http://192.168.8.100:8080/api/check`,requestOptions)
+        await fetch(`https://healthyfoodssabra.herokuapp.com/api/check`,requestOptions)
         .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
 
@@ -209,9 +209,9 @@ function OCR({navigation}) {
 
                         var arraytest = ["HA", "HB","UA","A", "B", "UB", "UC","HC","HD","HE","UC","UD","UE", "UKA","HKD","HKE","HKC"]
 
-                        checkIngredient(arraytest);
+                        checkIngredient(array);
 
-                        console.log(arraytest);
+                        console.log(array);
 
                         // console.log(ingredientList)
 
