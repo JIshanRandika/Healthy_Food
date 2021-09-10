@@ -108,7 +108,7 @@ function OCR({navigation}) {
             body: JSON.stringify({ ingredientArray: ingredientArray })
         };
 
-        await fetch(`http://192.168.8.101:8080/api/check`,requestOptions)
+        await fetch(`http://192.168.8.100:8080/api/check`,requestOptions)
         .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
 
@@ -150,6 +150,7 @@ function OCR({navigation}) {
             <View style={styles.options}>
                 <View style={styles.button}>
                     <Button
+                        color="#107E7DFF"
                         disabled={isLoading}
                         title="Camera"
                         onPress={() => {
@@ -159,6 +160,7 @@ function OCR({navigation}) {
                 </View>
                 <View style={styles.button}>
                     <Button
+                        color="#107E7DFF"
                         disabled={isLoading}
                         title="Picker"
                         onPress={() => {
@@ -207,7 +209,7 @@ function OCR({navigation}) {
 
                         var arraytest = ["HA", "HB","UA","A", "B", "UB", "UC","HC","HD","HE","UC","UD","UE", "UKA","HKD","HKE","HKC"]
 
-                        checkIngredient(array);
+                        checkIngredient(arraytest);
 
                         console.log(arraytest);
 
@@ -257,6 +259,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 10,
+
     },
     imageContainer: {
         justifyContent: 'center',
