@@ -6,6 +6,7 @@ import TesseractOcr, {
     LANG_ENGLISH,
     useEventListener,
 } from 'react-native-tesseract-ocr';
+import * as Progress from 'react-native-progress';
 
 
 
@@ -22,6 +23,9 @@ function OCR({navigation}) {
     const [progress, setProgress] = useState(0);
     const [imgSrc, setImgSrc] = useState(null);
     const [text, setText] = useState('');
+
+    const [isComplete, setIsComplete] = useState(true);
+    const [ispProcessStart, setIspProcessStart] = useState(null);
 
 
     const [ingredientList, ingredientListSet] = React.useState([]);
@@ -44,6 +48,17 @@ function OCR({navigation}) {
                 tesseractOptions,
             );
             setText(recognizedText);
+
+            // ======
+            //
+            // var array = text.split(" ");
+            //
+            // console.log(array);
+            //
+            // checkIngredient(array);
+
+            // =======
+
         } catch (err) {
             console.error(err);
             setText('');
@@ -61,6 +76,8 @@ function OCR({navigation}) {
             const image = await ImagePicker.openPicker(options);
             setImgSrc({uri: image.path});
             await recognizeTextFromImage(image.path);
+
+
         } catch (err) {
             if (err.message !== 'User cancelled image selection') {
                 console.error(err);
@@ -97,6 +114,14 @@ function OCR({navigation}) {
     //         title: "Third Item",
     //     },
     // ];
+
+
+    function processDelay (){
+        setTimeout(function() {
+            setIsComplete(false)
+        }, 5000);
+    }
+
 
     const checkIngredient = async (ingredientArray) => {
         // fetch('/api/getsome')
@@ -145,8 +170,8 @@ function OCR({navigation}) {
     return (
 
         <View style={styles.container}>
-            <Text style={styles.title}>Ishan Randika</Text>
-            <Text style={styles.instructions}>OCR TEST</Text>
+            <Text style={styles.title}>Healthy Foods</Text>
+            <Text style={{fontSize:8, textAlign:"center", marginHorizontal:70}}>Take an image from Camera or Upload an image from your Gallery which includes ingredients you need to test.</Text>
             <View style={styles.options}>
                 <View style={styles.button}>
                     <Button
@@ -158,11 +183,12 @@ function OCR({navigation}) {
                         }}
                     />
                 </View>
+                <Text style={{marginTop:5}}>OR</Text>
                 <View style={styles.button}>
                     <Button
                         color="#107E7DFF"
                         disabled={isLoading}
-                        title="Picker"
+                        title="Gallery"
                         onPress={() => {
                             recognizeFromPicker();
                         }}
@@ -175,10 +201,12 @@ function OCR({navigation}) {
                     {isLoading ? (
                         <ProgressCircle showsText progress={progress} />
                     ) : (
+
                         <Text>{text}</Text>
 
                     )}
                 </View>
+
             )}
             <View style={styles.button}>
                 {/*<Button*/}
@@ -198,29 +226,87 @@ function OCR({navigation}) {
 
                 {/*    }}*/}
                 {/*/>*/}
+                <View style={{alignItems:"center"}}>
+                    <Text style={{fontSize:8, textAlign:"center", marginHorizontal:70}}>Process your data.</Text>
 
-                <Button
-                    disabled={isLoading}
-                    title="Check"
-                    onPress={() => {
+                    <View style={{marginTop:10,width:200,marginBottom:10}}>
+                        <Button
 
-                        var array = text.split(" ");
+                            disabled={isLoading}
+                            title="Process"
+                            onPress={() => {
+                                // var arraytest = ["HA", "HB","UA","A", "B", "UB", "UC","HC","HD","HE","UC","UD","UE", "UKA","HKD","HKE","HKC"]
+
+                                setIspProcessStart(true)
+                                processDelay();
+
+                                var array = text.split(/([!,?,.])/);
+
+                                console.log(array);
+
+                                checkIngredient(array);
 
 
-                        var arraytest = ["HA", "HB","UA","A", "B", "UB", "UC","HC","HD","HE","UC","UD","UE", "UKA","HKD","HKE","HKC"]
 
-                        checkIngredient(array);
+                            }}
+                        />
+                    </View>
 
-                        console.log(array);
 
-                        // console.log(ingredientList)
 
-                        navigation.navigate('YourResult',
-                            ingredientList
-                        )
+                    {ispProcessStart && (
+                        <View style={styles.imageContainer}>
+                            {isComplete ? (
+                                    <Progress.CircleSnail color={['red', 'green', 'blue']} />
+                                // <Text>Process !</Text>
+                            ) : (
 
-                    }}
-                />
+                                <Text style={{color:"#d5573b",fontWeight:'bold'}}>Completed your Process !</Text>
+
+                            )}
+                        </View>
+
+                    )}
+                    {/*{isComplete ? (*/}
+                    {/*    <Text>Completed your Process !</Text>*/}
+
+                    {/*) : (*/}
+
+                    {/*    <Text>Completed your Process !</Text>*/}
+
+
+                    {/*)}*/}
+
+                    {/*{isComplete && (*/}
+
+                    {/*    <View style={styles.imageContainer}>*/}
+
+                    {/*            <Text>Completed your Process !</Text>*/}
+
+                    {/*    </View>*/}
+
+                    {/*)}*/}
+                    <Text style={{fontSize:8, textAlign:"center", marginHorizontal:70,marginTop:10}}>View your Results.</Text>
+
+                    <View style={{width:200,marginTop:10}}>
+                        <Button
+                            disabled={isLoading}
+                            title="View Results"
+                            onPress={() => {
+                                setIsComplete(true)
+                                setIspProcessStart(null)
+
+                                navigation.navigate('YourResult',
+                                    ingredientList
+                                )
+
+                            }}
+                        />
+                    </View>
+
+                </View>
+
+
 
             </View>
 

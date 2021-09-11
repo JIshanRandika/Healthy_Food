@@ -96,7 +96,7 @@ export default class Screen extends React.Component {
 
                 <SafeAreaView>
                     <View style={{alignItems:"center", marginTop:20, marginBottom:10}}>
-                        <Text style={{fontSize:30,fontWeight:"bold",color:{printStatus} ==="Healthy"? "#107e7d" :"#d5573b"}}>{printStatus}</Text>
+                        <Text style={{fontSize:30,fontWeight:"bold",color:printStatus ==="Healthy"? "#107e7d" :"#d5573b"}}>{printStatus}</Text>
                     </View>
                     <View style={{alignItems:"center"}}>
                         <Progress.Pie progress={avg} size={100} showsText={true} duration={100} color={color}/>
